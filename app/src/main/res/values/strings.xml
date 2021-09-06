@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">To Do List</string>
     <string name="title_text_tasks">Tarefas</string>
-    <string name="add_button_description">Botão de adicionar</string>
+    <string name="add_button_description">Adicionar nova tarefa</string>
     <string name="crate_task_title_text">Criar Tarefa</string>
     <string name="input_title_text_hint">Título</string>
     <string name="input_date_text_hint">Data</string>
