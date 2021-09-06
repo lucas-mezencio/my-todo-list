@@ -50,7 +50,17 @@ class AddTaskActivity : AppCompatActivity() {
                 .setTimeFormat(TimeFormat.CLOCK_24H)
                 .build()
             timePicker.addOnPositiveButtonClickListener {
-                binding.tinTime.text = "${timePicker.hour}:${timePicker.minute}"
+                val hour = if (timePicker.hour in 0..9) {
+                    "0${timePicker.hour}"
+                } else {
+                    "${timePicker.hour}"
+                }
+                val minute = if (timePicker.minute in 0..9) {
+                    "0${timePicker.minute}"
+                } else {
+                    "${timePicker.minute}"
+                }
+                binding.tinTime.text = "$hour:$minute"
             }
             timePicker.show(supportFragmentManager, null)
         }
