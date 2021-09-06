@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">To Do List</string>
+    <string name="title_text_tasks">Tarefas</string>
+    <string name="add_button_description">Botão de adicionar</string>
 </resources>
