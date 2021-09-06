@@ -6,8 +6,10 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import com.lucasmezencio.todolist.databinding.ActivityAddTaskBinding
+import com.lucasmezencio.todolist.datasource.TaskDataSource
 import com.lucasmezencio.todolist.extensions.format
 import com.lucasmezencio.todolist.extensions.text
+import com.lucasmezencio.todolist.model.Task
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
@@ -56,7 +58,11 @@ class AddTaskActivity : AppCompatActivity() {
 
     private fun newTaskButtonListener() {
         binding.btnNewTask.setOnClickListener {
-
+            TaskDataSource.insertTask(Task(
+                binding.tinTitle.text,
+                binding.tinTime.text,
+                binding.tinDate.text
+            ))
         }
     }
 
