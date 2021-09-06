@@ -3,6 +3,8 @@ package com.lucasmezencio.todolist.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import com.lucasmezencio.todolist.databinding.ActivityAddTaskBinding
 import com.lucasmezencio.todolist.extensions.format
 import com.lucasmezencio.todolist.extensions.text
@@ -23,6 +25,9 @@ class AddTaskActivity : AppCompatActivity() {
 
     private fun insertListeners() {
         dateListener()
+        timeListener()
+        newTaskButtonListener()
+        cancelTaskButtonListener()
     }
 
     private fun dateListener() {
@@ -34,6 +39,30 @@ class AddTaskActivity : AppCompatActivity() {
                 binding.tinDate.text = Date(it + offset).format()
             }
             datePicker.show(supportFragmentManager, "DATE_PICKER_TAG")
+        }
+    }
+
+    private fun timeListener() {
+        binding.tinTime.editText?.setOnClickListener {
+            val timePicker = MaterialTimePicker.Builder()
+                .setTimeFormat(TimeFormat.CLOCK_24H)
+                .build()
+            timePicker.addOnPositiveButtonClickListener {
+                binding.tinTime.text = "${timePicker.hour}:${timePicker.minute}"
+            }
+            timePicker.show(supportFragmentManager, null)
+        }
+    }
+
+    private fun newTaskButtonListener() {
+        binding.btnNewTask.setOnClickListener {
+
+        }
+    }
+
+    private fun cancelTaskButtonListener() {
+        binding.btnCancelTask.setOnClickListener {
+            finish()
         }
     }
 }
