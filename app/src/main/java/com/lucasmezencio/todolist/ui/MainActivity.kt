@@ -9,10 +9,16 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val adapter by lazy {
+        TaskListAdapter()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.rvTaskList.adapter = adapter
 
         insertListeners()
     }
