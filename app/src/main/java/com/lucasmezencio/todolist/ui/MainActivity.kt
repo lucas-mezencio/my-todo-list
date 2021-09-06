@@ -1,10 +1,9 @@
-package com.lucasmezencio.todolist
+package com.lucasmezencio.todolist.ui
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lucasmezencio.todolist.databinding.ActivityMainBinding
-import com.lucasmezencio.todolist.ui.AddTaskActivity
 
 class MainActivity : AppCompatActivity() {
 
