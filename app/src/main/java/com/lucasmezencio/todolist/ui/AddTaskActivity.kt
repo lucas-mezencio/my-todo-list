@@ -2,7 +2,6 @@ package com.lucasmezencio.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -16,6 +15,10 @@ import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
 
+    companion object {
+        const val TASK_ID = "task_id"
+    }
+
     private lateinit var binding: ActivityAddTaskBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,8 +27,19 @@ class AddTaskActivity : AppCompatActivity() {
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (intent.hasExtra(TASK_ID)) {
+            val taskId = intent.getIntExtra(TASK_ID, 0)
+            TaskDataSource.findById(taskId)?.let {
+                binding.tinTitle.text = it.title
+                binding.tinDate.text = it.date
+                binding.tinTime.text = it.time
+            }
+        }
+
         insertListeners()
     }
+
+
 
     private fun insertListeners() {
         dateListener()
@@ -73,7 +87,8 @@ class AddTaskActivity : AppCompatActivity() {
             val task = Task(
                 binding.tinTitle.text,
                 binding.tinTime.text,
-                binding.tinDate.text
+                binding.tinDate.text,
+                intent.getIntExtra(TASK_ID, 0)
             )
             TaskDataSource.insertTask(task)
             setResult(Activity.RESULT_OK)

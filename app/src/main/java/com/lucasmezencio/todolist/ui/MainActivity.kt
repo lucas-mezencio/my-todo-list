@@ -42,8 +42,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun optionsMenuListeners() {
-        adapter.listenerOptionsEdit = {
-
+        adapter.listenerOptionsEdit = { task ->
+            val intent = Intent(this, AddTaskActivity::class.java)
+            intent.putExtra(AddTaskActivity.TASK_ID, task.id)
+            startActivityForResult(intent, CREATE_NEW_TASK)
         }
         adapter.listenerOptionsDelete = {
 
