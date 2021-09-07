@@ -7,3 +7,4 @@ O objetivo do projeto é criar um App de To do list, e evoluir a aplicação de 
 ### Sobre o App:
 O aplicativo em si possui uma premissa muito simples, criar e listar tarefas, atualmente, com capacidade de armazenar título, data e hora. Possui duas telas simples, uma para listagem e outra para criação. Contudo, essa simplicidade abre a possibiliadade para implementação de inúmeras melhorias.
 
+![Tela Inicial](.screenshots/start_screen.jpeg)
