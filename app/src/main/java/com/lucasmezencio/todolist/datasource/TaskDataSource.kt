@@ -17,4 +17,8 @@ object TaskDataSource {
     }
 
     fun findById(id: Int) = list.find { it.id == id }
+
+    fun deleteTask(task: Task) {
+        list.remove(task)
+    }
 }

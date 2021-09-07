@@ -39,8 +39,6 @@ class AddTaskActivity : AppCompatActivity() {
         insertListeners()
     }
 
-
-
     private fun insertListeners() {
         dateListener()
         timeListener()

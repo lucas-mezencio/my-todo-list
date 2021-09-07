@@ -47,8 +47,9 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra(AddTaskActivity.TASK_ID, task.id)
             startActivityForResult(intent, CREATE_NEW_TASK)
         }
-        adapter.listenerOptionsDelete = {
-
+        adapter.listenerOptionsDelete = { task ->
+            TaskDataSource.deleteTask(task)
+            updateList()
         }
     }
 
