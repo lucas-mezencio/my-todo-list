@@ -16,9 +16,8 @@ class TaskListAdapter() : ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-
+        holder.bind(getItem(position))
     }
-
 }
 
 class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
