@@ -12,8 +12,8 @@ import com.lucasmezencio.todolist.model.Task
 
 class TaskListAdapter() : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCallback()) {
 
-    var listenerActionEdit: (Task) -> Unit = {}
-    var listenerActionDelete: (Task) -> Unit = {}
+    var listenerOptionsEdit: (Task) -> Unit = {}
+    var listenerOptionsDelete: (Task) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -41,8 +41,8 @@ class TaskListAdapter() : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(Diff
             popupMenu.menuInflater.inflate(R.menu.popup_options_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.actionEdit -> listenerActionEdit(item)
-                    R.id.actionDelete -> listenerActionDelete(item)
+                    R.id.actionEdit -> listenerOptionsEdit(item)
+                    R.id.actionDelete -> listenerOptionsDelete(item)
                 }
                 return@setOnMenuItemClickListener true
             }
