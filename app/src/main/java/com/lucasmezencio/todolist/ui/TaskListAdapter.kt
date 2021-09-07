@@ -2,13 +2,19 @@ package com.lucasmezencio.todolist.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.lucasmezencio.todolist.R
 import com.lucasmezencio.todolist.databinding.ItemTaskBinding
 import com.lucasmezencio.todolist.model.Task
 
-class TaskListAdapter() : ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
+class TaskListAdapter() : ListAdapter<Task, TaskListAdapter.TaskViewHolder>(DiffCallback()) {
+
+    var listenerActionEdit: (Task) -> Unit = {}
+    var listenerActionDelete: (Task) -> Unit = {}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemTaskBinding.inflate(inflater, parent, false)
@@ -18,12 +24,30 @@ class TaskListAdapter() : ListAdapter<Task, TaskViewHolder>(DiffCallback()) {
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-}
 
-class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(item: Task) {
-        binding.tvTitle.text = item.title
-        binding.tvTime.text = "${item.date} ${item.time}"
+    inner class TaskViewHolder(private val binding: ItemTaskBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: Task) {
+            binding.tvTitle.text = item.title
+            binding.tvTime.text = "${item.date} ${item.time}"
+            binding.ivOptions.setOnClickListener {
+                showPopup(item)
+            }
+        }
+
+        private fun showPopup(item: Task) {
+            val ivOptions = binding.ivOptions
+            val popupMenu = PopupMenu(ivOptions.context, ivOptions)
+            popupMenu.menuInflater.inflate(R.menu.popup_options_menu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.actionEdit -> listenerActionEdit(item)
+                    R.id.actionDelete -> listenerActionDelete(item)
+                }
+                return@setOnMenuItemClickListener true
+            }
+            popupMenu.show()
+        }
     }
 }
 
