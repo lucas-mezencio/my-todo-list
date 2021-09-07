@@ -8,4 +8,6 @@
     <string name="input_time_text_hint">Hora</string>
     <string name="create_task_button_text">Criar Tarefa</string>
     <string name="cancel_task_button_text">Cancelar</string>
+    <string name="edit_popup_text">Editar</string>
+    <string name="delete_popup_text">Deletar</string>
 </resources>
