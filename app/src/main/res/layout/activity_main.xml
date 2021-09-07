@@ -19,7 +19,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold"/>
 
-    <include layout="@layout/empty_state" />
+    <include android:id="@+id/viewEmptyState"
+        layout="@layout/empty_state" />
     
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTaskList"

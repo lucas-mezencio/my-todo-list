@@ -3,6 +3,7 @@ package com.lucasmezencio.todolist.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.lucasmezencio.todolist.databinding.ActivityMainBinding
 import com.lucasmezencio.todolist.datasource.TaskDataSource
@@ -61,6 +62,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList() {
-        adapter.submitList(TaskDataSource.getList())
+        val list = TaskDataSource.getList()
+        binding.viewEmptyState.emptyState.visibility = if (list.isNotEmpty()) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
+        adapter.submitList(list)
     }
 }
