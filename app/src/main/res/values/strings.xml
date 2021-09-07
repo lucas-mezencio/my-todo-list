@@ -10,4 +10,5 @@
     <string name="cancel_task_button_text">Cancelar</string>
     <string name="edit_popup_text">Editar</string>
     <string name="delete_popup_text">Deletar</string>
+    <string name="empty_state_text">Você ainda não possui nenhuma tarefa!</string>
 </resources>
