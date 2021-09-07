@@ -1,6 +1,8 @@
 package com.lucasmezencio.todolist.ui
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -68,11 +70,14 @@ class AddTaskActivity : AppCompatActivity() {
 
     private fun newTaskButtonListener() {
         binding.btnNewTask.setOnClickListener {
-            TaskDataSource.insertTask(Task(
+            val task = Task(
                 binding.tinTitle.text,
                 binding.tinTime.text,
                 binding.tinDate.text
-            ))
+            )
+            TaskDataSource.insertTask(task)
+            setResult(Activity.RESULT_OK)
+            finish()
         }
     }
 

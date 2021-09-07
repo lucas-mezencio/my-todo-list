@@ -4,8 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.lucasmezencio.todolist.databinding.ActivityMainBinding
+import com.lucasmezencio.todolist.datasource.TaskDataSource
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        private const val CREATE_NEW_TASK = 100
+    }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -18,15 +23,21 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.rvTaskList.adapter = adapter
-
         insertListeners()
     }
 
     private fun insertListeners() {
         binding.fabAddButton.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
-            startActivity(intent)
+            startActivityForResult(intent, CREATE_NEW_TASK)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_NEW_TASK) {
+            binding.rvTaskList.adapter = adapter
+            adapter.submitList(TaskDataSource.getList())
         }
     }
 }
