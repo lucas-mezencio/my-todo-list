@@ -1,6 +1,8 @@
 package com.lucasmezencio.todolist.extensions
 
 import com.google.android.material.textfield.TextInputLayout
+import com.lucasmezencio.todolist.datasource.db.TaskEntity
+import com.lucasmezencio.todolist.model.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,3 +17,21 @@ var TextInputLayout.text: String
     set(value) {
         editText?.setText(value)
     }
+
+fun RegistrationTaskParams.toTaskEntity(): TaskEntity {
+    return TaskEntity(
+        title = this.title,
+        description = this.description,
+        time = this.time,
+        date = this.date
+    )
+}
+
+fun TaskEntity.toTask(): Task {
+    return Task(
+        id = this.id,
+        title = this.title,
+        time = this.time,
+        date = this.date
+    )
+}
