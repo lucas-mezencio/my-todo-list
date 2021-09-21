@@ -1,4 +1,4 @@
-package com.lucasmezencio.todolist.datasource
+package com.lucasmezencio.todolist.datasource.repository
 
 import com.lucasmezencio.todolist.model.Task
 

@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.lucasmezencio.todolist.databinding.ActivityMainBinding
-import com.lucasmezencio.todolist.datasource.TaskDataSource
+import com.lucasmezencio.todolist.datasource.repository.TaskDataSource
 
 class MainActivity : AppCompatActivity() {
 
