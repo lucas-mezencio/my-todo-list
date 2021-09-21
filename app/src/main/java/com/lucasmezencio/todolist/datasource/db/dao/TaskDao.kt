@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.lucasmezencio.todolist.datasource.db.TaskEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TaskDao {
@@ -16,5 +17,5 @@ interface TaskDao {
     fun getTaskById(id: Int): TaskEntity
 
     @Query("select * from tasks")
-    fun getTaskList(): List<TaskEntity>
+    fun getTaskList(): Flow<List<TaskEntity>>
 }
