@@ -14,4 +14,8 @@ class TaskDbDataSource(
     override fun getTaskById(id: Int): Task = taskDao.getTaskById(id)
 
     override fun getTaskList(): Flow<List<Task>> = taskDao.getTaskList()
+
+    override suspend fun deleteAll() {
+        taskDao.deleteAll()
+    }
 }

@@ -10,4 +10,6 @@ interface TaskRepository {
     fun getTaskById(id: Int): Task
 
     fun getTaskList(): Flow<List<Task>>
+
+    suspend fun deleteAll()
 }
