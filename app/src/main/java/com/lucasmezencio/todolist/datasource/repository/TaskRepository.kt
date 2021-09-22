@@ -1,12 +1,11 @@
 package com.lucasmezencio.todolist.datasource.repository
 
-import com.lucasmezencio.todolist.extensions.RegistrationTaskParams
 import com.lucasmezencio.todolist.model.Task
 import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
 
-    suspend fun insert(registrationTaskParams: RegistrationTaskParams)
+    suspend fun insert(task: Task)
 
     fun getTaskById(id: Int): Task
 

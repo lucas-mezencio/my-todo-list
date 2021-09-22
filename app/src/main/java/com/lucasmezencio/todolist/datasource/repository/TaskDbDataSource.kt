@@ -1,16 +1,13 @@
 package com.lucasmezencio.todolist.datasource.repository
 
 import com.lucasmezencio.todolist.datasource.db.dao.TaskDao
-import com.lucasmezencio.todolist.extensions.RegistrationTaskParams
-import com.lucasmezencio.todolist.extensions.toTask
 import com.lucasmezencio.todolist.model.Task
 import kotlinx.coroutines.flow.Flow
 
 class TaskDbDataSource(
     private val taskDao: TaskDao
 ) :  TaskRepository{
-    override suspend fun insert(registrationTaskParams: RegistrationTaskParams) {
-        val task = registrationTaskParams.toTask()
+    override suspend fun insert(task: Task) {
         taskDao.createTask(task)
     }
 

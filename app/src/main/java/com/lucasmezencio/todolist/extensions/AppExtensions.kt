@@ -1,7 +1,6 @@
 package com.lucasmezencio.todolist.extensions
 
 import com.google.android.material.textfield.TextInputLayout
-import com.lucasmezencio.todolist.model.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -17,11 +16,3 @@ var TextInputLayout.text: String
         editText?.setText(value)
     }
 
-fun RegistrationTaskParams.toTask(): Task {
-    return Task(
-        title = this.title,
-        description = this.description,
-        time = this.time,
-        date = this.date
-    )
-}
