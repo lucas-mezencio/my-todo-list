@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface TaskDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun createTask(task: Task)
+    suspend fun insert(task: Task)
 
     @Query("SELECT * FROM tasks WHERE id = :id")
     fun getTaskById(id: Int): Task

@@ -8,7 +8,7 @@ class TaskDbDataSource(
     private val taskDao: TaskDao
 ) :  TaskRepository{
     override suspend fun insert(task: Task) {
-        taskDao.createTask(task)
+        taskDao.insert(task)
     }
 
     override fun getTaskById(id: Int): Task = taskDao.getTaskById(id)
