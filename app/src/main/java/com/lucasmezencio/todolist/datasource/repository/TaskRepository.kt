@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TaskRepository {
 
-    fun insert(registrationTaskParams: RegistrationTaskParams)
+    suspend fun insert(registrationTaskParams: RegistrationTaskParams)
 
     fun getTaskById(id: Int): Task
 

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 class TaskDbDataSource(
     private val taskDao: TaskDao
 ) :  TaskRepository{
-    override fun insert(registrationTaskParams: RegistrationTaskParams) {
+    override suspend fun insert(registrationTaskParams: RegistrationTaskParams) {
         val task = registrationTaskParams.toTask()
         taskDao.createTask(task)
     }
