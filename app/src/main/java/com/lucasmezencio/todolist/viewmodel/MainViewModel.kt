@@ -1,15 +1,12 @@
 package com.lucasmezencio.todolist.viewmodel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.lucasmezencio.todolist.datasource.repository.TaskRepository
 import com.lucasmezencio.todolist.model.Task
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: TaskRepository) : ViewModel() {
-    val taskList: Flow<List<Task>> = repository.getTaskList()
+    val taskList: LiveData<List<Task>> = repository.getTaskList().asLiveData()
 
     fun insert(task: Task) = viewModelScope.launch {
         repository.insert(task)
