@@ -3,9 +3,13 @@ package com.lucasmezencio.todolist.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import com.lucasmezencio.todolist.application.TaskApplication
 import com.lucasmezencio.todolist.databinding.ActivityMainBinding
+import com.lucasmezencio.todolist.viewmodel.MainViewModel
+import com.lucasmezencio.todolist.viewmodel.MainViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -18,6 +22,9 @@ class MainActivity : AppCompatActivity() {
     private val adapter by lazy {
         TaskListAdapter()
     }
+    private val mainViewModel: MainViewModel by viewModels {
+        MainViewModelFactory((application as TaskApplication).repository)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +32,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.rvTaskList.adapter = adapter
+
+        mainViewModel.taskList.observe(this, Observer { tasks ->
+            tasks.let {
+                adapter.submitList(it)
+            }
+        })
+
         insertListeners()
         updateList()
     }
@@ -48,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, CREATE_NEW_TASK)
         }
         adapter.listenerOptionsDelete = { task ->
-            TaskDataSource.deleteTask(task)
+//            TaskDataSource.deleteTask(task)
             updateList()
         }
     }
@@ -61,12 +75,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateList() {
-        val list = TaskDataSource.getList()
-        binding.viewEmptyState.emptyState.visibility = if (list.isNotEmpty()) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
-        adapter.submitList(list)
+//        val list = TaskDataSource.getList()
+//        binding.viewEmptyState.emptyState.visibility = if (list.isNotEmpty()) {
+//            View.GONE
+//        } else {
+//            View.VISIBLE
+//        }
+//        adapter.submitList(list)
     }
+
+
 }
