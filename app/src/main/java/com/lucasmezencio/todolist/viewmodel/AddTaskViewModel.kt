@@ -8,12 +8,15 @@ import com.lucasmezencio.todolist.model.Task
 import kotlinx.coroutines.launch
 
 class AddTaskViewModel(private val repository: TaskRepository) : ViewModel() {
+
+    var task: Task? = null
+
     fun insert(task: Task) = viewModelScope.launch {
         repository.insert(task)
     }
 
-    fun getTaskById(id: Int): Task = viewModelScope.launch {
-        repository.getTaskById(id)
+    fun getTaskById(id: Int) = viewModelScope.launch {
+        task = repository.getTaskById(id)
     }
 }
 
