@@ -3,6 +3,7 @@ package com.lucasmezencio.todolist.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         insertListeners()
-        updateList()
+        updateEmptyBackground()
     }
 
     private fun insertListeners() {
@@ -63,26 +64,22 @@ class MainActivity : AppCompatActivity() {
         }
         adapter.listenerOptionsDelete = { task ->
 //            TaskDataSource.deleteTask(task)
-            updateList()
+            updateEmptyBackground()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == CREATE_NEW_TASK && resultCode == Activity.RESULT_OK) {
-            updateList()
+            updateEmptyBackground()
         }
     }
 
-    private fun updateList() {
-//        val list = TaskDataSource.getList()
-//        binding.viewEmptyState.emptyState.visibility = if (list.isNotEmpty()) {
-//            View.GONE
-//        } else {
-//            View.VISIBLE
-//        }
-//        adapter.submitList(list)
+    private fun updateEmptyBackground() {
+        binding.viewEmptyState.emptyState.visibility = if (mainViewModel.isTaskListEmpty) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
     }
-
-
 }

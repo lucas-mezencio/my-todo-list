@@ -1,5 +1,6 @@
 package com.lucasmezencio.todolist.datasource.db.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -21,4 +22,7 @@ interface TaskDao {
 
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()
+
+    @Query("SELECT * FROM tasks ORDER BY id LIMIT 1")
+    fun getLastTask(): LiveData<Task>
 }

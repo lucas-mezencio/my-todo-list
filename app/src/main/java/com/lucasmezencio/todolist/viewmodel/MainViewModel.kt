@@ -1,15 +1,19 @@
 package com.lucasmezencio.todolist.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.asLiveData
+import androidx.lifecycle.*
 import com.lucasmezencio.todolist.datasource.repository.TaskRepository
 import com.lucasmezencio.todolist.model.Task
+import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: TaskRepository) : ViewModel() {
 
     val taskList: LiveData<List<Task>> = repository.getTaskList().asLiveData()
+    var isTaskListEmpty: Boolean = true
+
+    fun setIsTaskListEmpty() = viewModelScope.launch {
+        val lastTask = repository.getLastTask()
+        isTaskListEmpty = lastTask.value == null
+    }
 }
 
 class MainViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory{

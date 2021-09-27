@@ -1,5 +1,6 @@
 package com.lucasmezencio.todolist.datasource.repository
 
+import androidx.lifecycle.LiveData
 import com.lucasmezencio.todolist.model.Task
 import kotlinx.coroutines.flow.Flow
 
@@ -12,4 +13,6 @@ interface TaskRepository {
     fun getTaskList(): Flow<List<Task>>
 
     suspend fun deleteAll()
+
+    suspend fun getLastTask(): LiveData<Task>
 }
