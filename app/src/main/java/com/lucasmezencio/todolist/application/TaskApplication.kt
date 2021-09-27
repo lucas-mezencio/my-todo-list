@@ -8,8 +8,8 @@ import kotlinx.coroutines.SupervisorJob
 
 class TaskApplication : Application() {
 
-    val applicationScope = CoroutineScope(SupervisorJob())
+    private val applicationScope = CoroutineScope(SupervisorJob())
 
-    val database by lazy { AppDatabase.getDatabase(this, applicationScope) }
+    private val database by lazy { AppDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { TaskDbDataSource(database.taskDao()) }
 }
