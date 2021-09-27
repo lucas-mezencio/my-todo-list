@@ -20,8 +20,9 @@ class TaskDbDataSource(
         taskDao.deleteAll()
     }
 
+    override suspend fun delete(id: Int) {
+        taskDao.delete(id)
+    }
+
     override suspend fun getLastTask(): LiveData<Task> = taskDao.getLastTask()
-
-
-
 }

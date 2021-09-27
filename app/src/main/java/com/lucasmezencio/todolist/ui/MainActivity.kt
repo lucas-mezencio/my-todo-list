@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             startActivityForResult(intent, CREATE_NEW_TASK)
         }
         adapter.listenerOptionsDelete = { task ->
-//            TaskDataSource.deleteTask(task)
+            mainViewModel.deleteTask(task.id)
             updateEmptyBackground()
         }
     }
@@ -81,5 +81,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             View.VISIBLE
         }
+        //        TODO("fix update when delete list")
     }
 }

@@ -17,11 +17,14 @@ interface TaskDao {
     @Query("SELECT * FROM tasks WHERE id = :id")
     suspend fun getTaskById(id: Int): Task
 
-    @Query("select * from tasks")
+    @Query("SELECT * FROM tasks")
     fun getTaskList(): Flow<List<Task>>
 
     @Query("DELETE FROM tasks")
     suspend fun deleteAll()
+
+    @Query("DELETE FROM tasks WHERE id = :id")
+    suspend fun delete(id: Int)
 
     @Query("SELECT * FROM tasks ORDER BY id LIMIT 1")
     fun getLastTask(): LiveData<Task>

@@ -14,6 +14,10 @@ class MainViewModel(private val repository: TaskRepository) : ViewModel() {
         val lastTask = repository.getLastTask()
         isTaskListEmpty = lastTask.value == null
     }
+
+    fun deleteTask(id: Int) = viewModelScope.launch {
+        repository.delete(id)
+    }
 }
 
 class MainViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory{

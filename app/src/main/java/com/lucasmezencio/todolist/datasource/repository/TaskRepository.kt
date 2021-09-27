@@ -14,5 +14,7 @@ interface TaskRepository {
 
     suspend fun deleteAll()
 
+    suspend fun delete(id: Int)
+
     suspend fun getLastTask(): LiveData<Task>
 }
