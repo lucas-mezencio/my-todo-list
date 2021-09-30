@@ -2,15 +2,19 @@ package com.lucasmezencio.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.lucasmezencio.todolist.application.TaskApplication
 import com.lucasmezencio.todolist.databinding.ActivityAddTaskBinding
-import com.lucasmezencio.todolist.datasource.TaskDataSource
 import com.lucasmezencio.todolist.extensions.format
 import com.lucasmezencio.todolist.extensions.text
 import com.lucasmezencio.todolist.model.Task
+import com.lucasmezencio.todolist.viewmodel.AddTaskViewModel
+import com.lucasmezencio.todolist.viewmodel.AddTaskViewModelFactory
 import java.util.*
 
 class AddTaskActivity : AppCompatActivity() {
@@ -21,6 +25,10 @@ class AddTaskActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddTaskBinding
 
+    private val addTaskViewModel: AddTaskViewModel by viewModels {
+        AddTaskViewModelFactory((application as TaskApplication).repository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,7 +37,7 @@ class AddTaskActivity : AppCompatActivity() {
 
         if (intent.hasExtra(TASK_ID)) {
             val taskId = intent.getIntExtra(TASK_ID, 0)
-            TaskDataSource.findById(taskId)?.let {
+            addTaskViewModel.task(taskId).observe(this) {
                 binding.tinTitle.text = it.title
                 binding.tinDate.text = it.date
                 binding.tinTime.text = it.time
@@ -83,12 +91,12 @@ class AddTaskActivity : AppCompatActivity() {
     private fun newTaskButtonListener() {
         binding.btnNewTask.setOnClickListener {
             val task = Task(
-                binding.tinTitle.text,
-                binding.tinTime.text,
-                binding.tinDate.text,
-                intent.getIntExtra(TASK_ID, 0)
+                title = binding.tinTitle.text,
+                time = binding.tinTime.text,
+                date = binding.tinDate.text,
+                id = intent.getIntExtra(TASK_ID, 0)
             )
-            TaskDataSource.insertTask(task)
+            addTaskViewModel.insert(task)
             setResult(Activity.RESULT_OK)
             finish()
         }
