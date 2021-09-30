@@ -8,12 +8,7 @@ import kotlinx.coroutines.launch
 class MainViewModel(private val repository: TaskRepository) : ViewModel() {
 
     val taskList: LiveData<List<Task>> = repository.getTaskList().asLiveData()
-    var isTaskListEmpty: Boolean = true
-
-    fun setIsTaskListEmpty() = viewModelScope.launch {
-        val lastTask = repository.getLastTask()
-        isTaskListEmpty = lastTask.value == null
-    }
+    val taskCount = repository.getTaskCount().asLiveData()
 
     fun deleteTask(id: Int) = viewModelScope.launch {
         repository.delete(id)

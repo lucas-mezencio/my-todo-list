@@ -76,11 +76,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateEmptyBackground() {
-        binding.viewEmptyState.emptyState.visibility = if (mainViewModel.isTaskListEmpty) {
-            View.GONE
-        } else {
-            View.VISIBLE
-        }
-        //        TODO("fix update when delete list")
+        mainViewModel.taskCount.observe(this, Observer { count ->
+            binding.viewEmptyState.emptyState.visibility = if (count > 0) {
+                View.GONE
+            } else {
+                View.VISIBLE
+            }
+        })
     }
 }
