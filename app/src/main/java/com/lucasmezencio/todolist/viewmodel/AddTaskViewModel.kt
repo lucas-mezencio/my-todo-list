@@ -14,6 +14,10 @@ class AddTaskViewModel(private val repository: TaskRepository) : ViewModel() {
     fun insert(task: Task) = viewModelScope.launch {
         repository.insert(task)
     }
+
+//    fun getTaskById(id: Int) = viewModelScope.launch {
+//        task = repository.getTaskById(id)
+//    }
 }
 
 class AddTaskViewModelFactory(private val repository: TaskRepository) : ViewModelProvider.Factory{
