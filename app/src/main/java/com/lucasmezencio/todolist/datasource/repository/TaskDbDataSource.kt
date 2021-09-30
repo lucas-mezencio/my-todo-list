@@ -11,7 +11,7 @@ class TaskDbDataSource(
         taskDao.insert(task)
     }
 
-    override suspend fun getTaskById(id: Int): Task = taskDao.getTaskById(id)
+    override fun getTaskById(id: Int): Flow<Task> = taskDao.getTaskById(id)
 
     override fun getTaskList(): Flow<List<Task>> = taskDao.getTaskList()
 
