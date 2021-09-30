@@ -2,6 +2,7 @@ package com.lucasmezencio.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -34,14 +35,14 @@ class AddTaskActivity : AppCompatActivity() {
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        if (intent.hasExtra(TASK_ID)) {
-//            val taskId = intent.getIntExtra(TASK_ID, 0)
-//            TaskDbDataSource.getTaskById(taskId)?.let {
-//                binding.tinTitle.text = it.title
-//                binding.tinDate.text = it.date
-//                binding.tinTime.text = it.time
-//            }
-//        }
+        if (intent.hasExtra(TASK_ID)) {
+            val taskId = intent.getIntExtra(TASK_ID, 0)
+            addTaskViewModel.task(taskId).observe(this) {
+                binding.tinTitle.text = it.title
+                binding.tinDate.text = it.date
+                binding.tinTime.text = it.time
+            }
+        }
 
         insertListeners()
     }
@@ -96,7 +97,6 @@ class AddTaskActivity : AppCompatActivity() {
                 id = intent.getIntExtra(TASK_ID, 0)
             )
             addTaskViewModel.insert(task)
-//            TaskDbDataSource.insert(task)
             setResult(Activity.RESULT_OK)
             finish()
         }
