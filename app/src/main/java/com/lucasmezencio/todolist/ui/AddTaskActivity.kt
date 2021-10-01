@@ -2,7 +2,6 @@ package com.lucasmezencio.todolist.ui
 
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -41,6 +40,7 @@ class AddTaskActivity : AppCompatActivity() {
                 binding.tinTitle.text = it.title
                 binding.tinDate.text = it.date
                 binding.tinTime.text = it.time
+                binding.tinDescription.text = it.description ?: ""
             }
         }
 
@@ -94,7 +94,8 @@ class AddTaskActivity : AppCompatActivity() {
                 title = binding.tinTitle.text,
                 time = binding.tinTime.text,
                 date = binding.tinDate.text,
-                id = intent.getIntExtra(TASK_ID, 0)
+                description = binding.tinDescription.text,
+                id = intent.getIntExtra(TASK_ID, 0),
             )
             addTaskViewModel.insert(task)
             setResult(Activity.RESULT_OK)
