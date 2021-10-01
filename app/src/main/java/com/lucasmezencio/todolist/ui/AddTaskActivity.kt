@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import com.lucasmezencio.todolist.R
 import com.lucasmezencio.todolist.application.TaskApplication
 import com.lucasmezencio.todolist.databinding.ActivityAddTaskBinding
 import com.lucasmezencio.todolist.extensions.format
@@ -42,6 +43,8 @@ class AddTaskActivity : AppCompatActivity() {
                 binding.tinTime.text = it.time
                 binding.tinDescription.text = it.description ?: ""
             }
+            binding.toolbarCreateTask.title = getString(R.string.edit_task_title_text)
+            binding.btnNewTask.text = getString(R.string.edit_task_button_text)
         }
 
         insertListeners()
